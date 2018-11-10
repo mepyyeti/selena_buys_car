@@ -61,7 +61,7 @@ class Trade < Car
 	end
 
 	def final_price_formatted
-		@final_price_formatted = format("%.2f", @purch_price - @value)
+		self.final_price_formatted = format("%.2f", @purch_price - @value)
 	end
 
 	def final_price
