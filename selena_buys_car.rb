@@ -46,9 +46,9 @@ class Trade < Car
 
 	def initialize(make,purch_price,value,reconditioning,profit_obj)
 		super(make,purch_price)
-		self.value = value.to_f
-		self.reconditioning=reconditioning.to_f
-		self.profit_obj=profit_obj.to_f
+		self.value = value
+		self.reconditioning=reconditioning
+		self.profit_obj=profit_obj
 	end
 	
 	def trade_markup
