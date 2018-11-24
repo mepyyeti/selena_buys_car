@@ -34,8 +34,8 @@ class Car
 end
 
 class Trade < Car
-	attr_reader :reconditioning 
-	attr_accessor :value, :profit_obj, :final_price_formatted
+	attr_reader :reconditioning, :other
+	attr_accessor :value, :profit_obj, :final_price_formatted, :license
 	
 	def reconditioning=(reconditioning)
 		if reconditioning < 0
@@ -43,18 +43,24 @@ class Trade < Car
 		end
 		@reconditioning= reconditioning
 	end
+	
+	def other=(other=0.00)
+		@other = other
+	end
 
-	def initialize(make,purch_price,value,reconditioning,profit_obj)
+	def initialize(make,purch_price,value,reconditioning,profit_obj,license,other)
 		super(make,purch_price)
 		self.value = value
 		self.reconditioning=reconditioning
 		self.profit_obj=profit_obj
+		self.license=license
+		self.other=other
 	end
 	
 	def trade_markup
 		puts "your trade is a #{@make}."
 		resell_price = @value + @reconditioning + @profit_obj
-		resell_price_formatted = format("$%.2f", @value + @reconditioning + @profit_obj)
+		resell_price_formatted = format("$%.2f", @value + @reconditioning + @profit_obj + @licene + @other)
 		percentage = format("%.2f",((@profit_obj / resell_price) * 100))
 		puts "your total mark up for the #{@make} trade is #{resell_price_formatted}."
 		puts "this requires a #{percentage} % markup."
@@ -101,9 +107,13 @@ while go
 		value = gets.chomp.to_f
 		puts "what is the reconditioning cost? >> "
 		reconditioning = gets.chomp.to_f
+		puts "what is the total licensing fee? >> "
+		license_fee = gets.chomp.to_f
+		puts "what is the total of any other misc. fee? >> "
+		misc_fee = gets.chomp.to_f
 		puts "what is the profit_obj? (**AS IT RELATES TO TRADE VEHICLE ONLY**) "
 		profit_obj = gets.chomp.to_f
-		my_trade_car = Trade.new(trade_make,sold,value, reconditioning, profit_obj)
+		my_trade_car = Trade.new(trade_make,sold,value, reconditioning, profit_obj, license_fee, misc_fee)
 		my_trade_car.trade_markup
 		my_trade_car.final_price_formatted
 		my_trade_car.final_price
