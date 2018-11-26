@@ -39,7 +39,7 @@ class Trade < Car
 	
 	def reconditioning=(reconditioning)
 		if reconditioning < 0
-			raise "reconditioning can\'t be negative. Repairs must be positive."
+			raise "reconditioning can't be negative. Repairs must be positive."
 		end
 		@reconditioning= reconditioning
 	end
@@ -60,7 +60,7 @@ class Trade < Car
 	def trade_markup
 		puts "your trade is a #{@make}."
 		resell_price = @value + @reconditioning + @profit_obj
-		resell_price_formatted = format("$%.2f", @value + @reconditioning + @profit_obj + @licene + @other)
+		resell_price_formatted = format("$%.2f", @value + @reconditioning + @profit_obj + @license + @other)
 		percentage = format("%.2f",((@profit_obj / resell_price) * 100))
 		puts "your total mark up for the #{@make} trade is #{resell_price_formatted}."
 		puts "this requires a #{percentage} % markup."
